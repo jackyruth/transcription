@@ -1,0 +1,6 @@
+.chunks/
+__pycache__
+*.mp3
+*.wav
+*.m4a
+transcribed_audio.md

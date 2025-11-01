@@ -5,7 +5,17 @@ import torch
 import sys
 
 
-def split_audio(input_path, chunk_ms=100000):
+def split_audio(input_path: str, chunk_ms: int = 100000) -> list[str]:
+    """
+    Split an audio file into smaller chunks for processing.
+
+    Args:
+        input_path: Path to the input audio file
+        chunk_ms: Length of each chunk in milliseconds
+
+    Returns:
+        List of paths to the generated audio chunks
+    """
     import os
 
     chunk_dir = ".chunks"
@@ -21,7 +31,18 @@ def split_audio(input_path, chunk_ms=100000):
     return chunk_paths
 
 
-def main():
+def main() -> None:
+    """
+    Main function to transcribe audio files using Parakeet ASR model.
+
+    Processes an audio file by:
+    1. Splitting into manageable chunks
+    2. Transcribing each chunk using the Parakeet model
+    3. Combining results into a markdown file
+    4. Formatting the markdown output
+
+    Usage: python main.py <audio_file>
+    """
     MODEL = r"nvidia/parakeet-tdt-0.6b-v3"
     PROCESSOR = r"cpu"
     OUTPUT_FILE = r"transcribed_audio.md"

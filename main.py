@@ -8,6 +8,7 @@ import sys
 def split_audio(input_path: str, chunk_ms: int = 100000) -> list[str]:
     """
     Split an audio file into smaller chunks for processing.
+    Pre-processes audio to match model requirements: 16kHz mono.
 
     Args:
         input_path: Path to the input audio file
@@ -22,6 +23,13 @@ def split_audio(input_path: str, chunk_ms: int = 100000) -> list[str]:
     os.makedirs(chunk_dir, exist_ok=True)
 
     audio = AudioSegment.from_file(input_path)
+    
+    # Pre-process audio to match model requirements
+    if audio.channels > 1:
+        audio = audio.set_channels(1)  # Convert to mono
+    if audio.frame_rate != 16000:
+        audio = audio.set_frame_rate(16000)  # Resample to 16kHz
+    
     chunks = [audio[i : i + chunk_ms] for i in range(0, len(audio), chunk_ms)]
     chunk_paths = []
     for idx, chunk in enumerate(chunks):

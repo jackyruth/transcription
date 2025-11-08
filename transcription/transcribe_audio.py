@@ -1,3 +1,8 @@
+import logging
+
+logging.disable(
+    logging.CRITICAL
+)  # Disables all logging to prevent logs being sent to stdout
 import nemo.collections.asr as nemo_asr
 from pydub import AudioSegment
 import torch
@@ -6,9 +11,12 @@ import os
 
 class AudioTranscriber:
     """
-    A class for transcribing audio files using the Parakeet ASR model.
+    Transcribes audio files using the Parakeet ASR model.
 
-    Handles audio preprocessing, chunking, transcription, and output formatting.
+    Processes an audio file by:
+    1. Preprocessing the audio to adhere to model input requirements
+    2. Splitting the audio into chunks to save on context
+    3. Transcribing each chunk using the Parakeet model
     """
 
     def __init__(
@@ -85,8 +93,7 @@ class AudioTranscriber:
         return chunk_paths
 
     def transcribe(self, audio_path: str) -> None:
-        """
-        Transcribe an audio file and output the formatted results.
+        """Transcribes an audio file.
 
         Args:
             audio_path: Path to the input audio file

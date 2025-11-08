@@ -4,14 +4,7 @@ from transcription.format_markdown import MarkdownFormatter
 
 
 def main() -> None:
-    """
-    Main function to transcribe audio files using Parakeet ASR model.
-
-    Processes an audio file by:
-    1. Splitting into manageable chunks
-    2. Transcribing each chunk using the Parakeet model
-    3. Combining results into a markdown file
-    4. Formatting the markdown output
+    """Transcribes audio files using Parakeet ASR model, then formats the text.
 
     Usage: python main.py <audio_file>
     """

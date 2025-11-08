@@ -9,19 +9,18 @@ Features:
 
 ## Usage
 
-Run `python main.py <audio_file>` to transcribe the audio into text.
-The text is stored in a markdown file called `transcribed_audio.md`.
+Run `python main.py <audio_file>` to transcribe the audio into text streamed to
+stdout.
 
-Audio files must be in `.wav` format. 
-You can use FFmpeg to convert between audio files.
+The text is formatted so that each sentence is on its own line, with line breaks
+if the line goes over a certain column number (set to 80).
+
+Try it out with the supplied audio clip `sample.wav`.
 
 ```bash
-ffmpeg -i audio.mp4 audio.wav
+python main.py sample.wav | tee output.md
 ```
 
 ## Installation
 
-Install python 3.13, then run 
-```bash 
-pip install -r requirements.txt
-```
+Install dependencies with `poetry install`.
